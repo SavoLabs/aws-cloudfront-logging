@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: AWS CloudFront Logging Solution
+Parameters:
+  Application:
+    Type: String
+    Description: The name of the application
+  Environment:
+    Type: String
+    AllowedValues:
+    - dev
+    - scratch
+    - qa
+    - staging
+    - prod
+Resources:
+  DistributionLogsBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName:
+      !Sub
+      - ${Application}-${Environment}-access-logs
+      - Application:
+          Ref: Application
+        Environment:
+          Ref: Environment
