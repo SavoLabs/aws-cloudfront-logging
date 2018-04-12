@@ -13,13 +13,23 @@ Parameters:
     - staging
     - prod
 Resources:
-  DistributionLogsBucket:
+  AccessLogsBucket:
     Type: "AWS::S3::Bucket"
     Properties:
       BucketName:
-      !Sub
-      - ${Application}-${Environment}-access-logs
-      - Application:
-          Ref: Application
-        Environment:
-          Ref: Environment
+        !Sub
+        - ${Application}-${Environment}-access
+        - Application:
+            Ref: Application
+          Environment:
+            Ref: Environment
+  ProcessedLogsBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName:
+        !Sub
+        - ${Application}-${Environment}-processed
+        - Application:
+            Ref: Application
+          Environment:
+            Ref: Environment
